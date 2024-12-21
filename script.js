@@ -37,25 +37,22 @@ function appendMessage(message, sender) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Function to query Gemini API (replace with your actual API key and endpoint)
+// Function to query Gemini API
 async function queryGeminiAPI(userMessage) {
-    const apiKey = 'AIzaSyCNZjpyYBfuZ5jzxO2QiyGlBA6y85RQZoE';  // Replace with your API key
-    const endpoint = 'https://api.google.com/gemini/query'; // Replace with the actual Gemini API endpoint
+    const apiKey = 'AIzaSyCNZjpyYBfuZ5jzxO2QiyGlBA6y85RQZoE';  // Replace with your actual API key
 
-    // Prepare the request body
     const body = {
-        query: userMessage,
-        knowledgeBase: knowledgeBase,  // You can pass knowledge base if needed
-        // You can add more parameters depending on the Gemini API documentation
+        "query": userMessage,
+        "knowledgeBase": knowledgeBase,  // Optional: If you want to pass knowledge base to Gemini
     };
 
-    const response = await fetch(endpoint, {
+    const response = await fetch('https://api.googleapis.com/v1/gemini/query', {  // Replace with actual endpoint, if applicable
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
     });
 
     const data = await response.json();
